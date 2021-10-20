@@ -26,7 +26,7 @@ SECRET_KEY = '$4pha&m478hw9c+*2)l0f6qrwtw$%28c$+)_4$@58fu5z@nu!c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['lemonadearunkumar.herokuapp.com','*']
+ALLOWED_HOSTS = ['https://lemonadearunkumar.herokuapp.com','*']
 
 
 # Application definition
@@ -127,5 +127,3 @@ LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='login'
 
 AUTH_USER_MODEL='main.CustomUser'
-# Activate Django-Heroku.
-django_heroku.settings(locals())
