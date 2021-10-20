@@ -6,6 +6,11 @@ from django.contrib import messages
 from .forms import AnswerForm,QuestionForm,ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Count
+from django.urls import reverse_lazy
+from django.views import generic
+
+from .forms import CustomUserCreationForm
+
 # Home Page
 def home(request):
     if 'q' in request.GET:
@@ -16,7 +21,26 @@ def home(request):
     paginator=Paginator(quests,10)
     page_num=request.GET.get('page',1)
     quests=paginator.page(page_num)
-    return render(request,'home.html',{'quests':quests})
+
+    questsTags=Question.objects.all()
+    tags=[]
+    for quest in questsTags:
+        qtags=[tag.strip() for tag in quest.tags.split(',')]
+        for tag in qtags:
+            if tag not in tags:
+                tags.append(tag)
+    # Fetch Questions
+    tag_with_count=[]
+    for tag in tags:
+        tag_data={
+            'name':tag,
+            'count':Question.objects.filter(tags__icontains=tag).count()
+        }
+        tag_with_count.append(tag_data)
+
+
+
+    return render(request,'home.html',{'quests':quests,'tags':tag_with_count})
 
 # Detail
 def detail(request,id):
@@ -85,15 +109,12 @@ def save_downvote(request):
             )
             return JsonResponse({'bool':True})
 
-# User Register
-def register(request):
-    form=UserCreationForm
-    if request.method=='POST':
-        regForm=UserCreationForm(request.POST)
-        if regForm.is_valid():
-            regForm.save()
-            messages.success(request,'User has been registered!!')
-    return render(request,'registration/register.html',{'form':form})
+
+class register(generic.CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/register.html'
+
 
 # Ask Form
 def ask_form(request):
@@ -138,23 +159,6 @@ def profile(request):
         'downvotes':downvotes,
     })
 
-# Tags Page
-def tags(request):
-    quests=Question.objects.all()
-    tags=[]
-    for quest in quests:
-        qtags=[tag.strip() for tag in quest.tags.split(',')]
-        for tag in qtags:
-            if tag not in tags:
-                tags.append(tag)
-    # Fetch Questions
-    tag_with_count=[]
-    for tag in tags:
-        tag_data={
-            'name':tag,
-            'count':Question.objects.filter(tags__icontains=tag).count()
-        }
-        tag_with_count.append(tag_data)
-    return render(request,'tags.html',{'tags':tag_with_count})
+
         
         

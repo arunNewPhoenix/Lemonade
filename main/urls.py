@@ -7,7 +7,7 @@ urlpatterns=[
     path('save-upvote',views.save_upvote,name='save-upvote'),
     path('save-downvote',views.save_downvote,name='save-downvote'),
     # User Register
-    path('accounts/register/',views.register,name='register'),
+    path('accounts/register/',views.register.as_view(),name='register'),
     # Profile
     path('accounts/profile/',views.profile,name='profile'),
     # Ask QUestion
@@ -15,5 +15,6 @@ urlpatterns=[
     # Tag Page
     path('tag/<str:tag>',views.tag,name='tag'),
     # Tags Page
-    path('tags',views.tags,name='tags'),
+    path('tags',views.home,name='tags'),
+   
 ]

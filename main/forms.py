@@ -1,5 +1,22 @@
 from django.forms import ModelForm
 from .models import Answer,Question,CustomUser
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
+
+
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('username',)
+
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('username',)
+
 
 class AnswerForm(ModelForm):
     class Meta:
@@ -14,4 +31,4 @@ class QuestionForm(ModelForm):
 class ProfileForm(ModelForm):
     class Meta:
         model=CustomUser
-        fields=('first_name','last_name','username','bio','location')
+        fields=('username',)
