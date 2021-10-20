@@ -1,1 +1,1 @@
-web: gunicorn questans.wsgi 
+web: gunicorn question-answer-website-in-django-3-and-bootstrap-4.wsgi 
