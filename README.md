@@ -1,8 +1,8 @@
 # Lemonade
 
 
-deployed on the heroku app : Live
-https://lemonadearunkumar.herokuapp.com/
+deployed on the PythonAnywhere Cloud Server app : Live
+https://ggsestcaajjstc.pythonanywhere.com/
 
 
 
