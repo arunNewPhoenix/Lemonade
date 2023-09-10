@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'questans.urls'
+ROOT_URLCONF = 'Lemonade.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'questans.wsgi.application'
+WSGI_APPLICATION = 'Lemonade.wsgi.application'
 
 
 # Database
